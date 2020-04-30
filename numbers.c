@@ -39,6 +39,13 @@ int main(void)
       break;
     }
 
+    case 'b':
+    {
+      Status addition_status = add_to_start(list, take_number_from_user());
+      printf("Addition was %ssuccessful.", addition_status ? "" : "un");
+      break;
+    }
+
     case 'l':
       display(list);
       break;
