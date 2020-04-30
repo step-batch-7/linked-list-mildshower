@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "list.h"
 
 void display_menu(void);
 
@@ -10,5 +11,6 @@ void display_menu(void)
 int main(void)
 {
   display_menu();
+
   return 0;
 }

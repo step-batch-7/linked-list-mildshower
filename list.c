@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
 
@@ -39,4 +40,18 @@ Status add_to_end(List_ptr list, int value)
   list->last = new_node;
   list->count++;
   return Success;
+}
+
+void display(List_ptr list)
+{
+  Node_ptr p_walker = list->head;
+  unsigned position = 0;
+  printf("\nHere is the List:\n");
+
+  while (p_walker != NULL)
+  {
+    printf("%3u -> %d\n", position, p_walker->value);
+    position++;
+    p_walker = p_walker->next;
+  }
 }
