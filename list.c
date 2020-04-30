@@ -14,9 +14,14 @@ Node_ptr create_node(int value)
 List_ptr create_list(void)
 {
   List_ptr list = malloc(sizeof(List));
-  list->head = NULL;
-  list->last = NULL;
-  list->count = 0;
+
+  if (list != NULL)
+  {
+
+    list->head = NULL;
+    list->last = NULL;
+    list->count = 0;
+  }
 
   return list;
 }
