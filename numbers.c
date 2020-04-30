@@ -10,7 +10,38 @@ void display_menu(void)
 
 int main(void)
 {
-  display_menu();
+  List_ptr list = create_list();
+
+  while (1)
+  {
+    display_menu();
+    char chosen_option;
+    scanf("%c", &chosen_option);
+
+    if (chosen_option == 'm')
+      break;
+
+    switch (chosen_option)
+    {
+    case 'a':
+      printf("\nEnter the number: ");
+      int given_number;
+      scanf("%d", &given_number);
+      Status addition_status = add_to_end(list, given_number);
+      printf("%d is %s added.", given_number, addition_status ? "" : "not");
+      break;
+
+    case 'l':
+      display(list);
+      break;
+
+    default:
+      printf("\nPlease choose a valid option from the menu.");
+      break;
+    }
+
+    fflush(stdin);
+  }
 
   return 0;
 }
