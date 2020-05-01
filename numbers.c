@@ -3,6 +3,9 @@
 
 void display_menu(void);
 int take_number_from_user(void);
+void add_number_to_end(List_ptr numbers);
+void add_number_to_start(List_ptr numbers);
+void insert_number_at_selected_position(List_ptr numbers);
 
 void display_menu(void)
 {
@@ -15,6 +18,36 @@ int take_number_from_user(void)
   printf("\nEnter the number: ");
   scanf("%d", &given_number);
   return given_number;
+}
+
+int take_position_from_user(void)
+{
+  int given_position;
+  printf("\nEnter the position: ");
+  scanf("%d", &given_position);
+  return given_position;
+}
+
+void add_number_to_end(List_ptr numbers)
+{
+  int given_number = take_number_from_user();
+  Status addition_status = add_to_end(numbers, given_number);
+  printf("Addition was %ssuccessful.", addition_status ? "" : "un");
+}
+
+void add_number_to_start(List_ptr numbers)
+{
+  int given_number = take_number_from_user();
+  Status addition_status = add_to_start(numbers, given_number);
+  printf("Addition was %ssuccessful.", addition_status ? "" : "un");
+}
+
+void insert_number_at_selected_position(List_ptr numbers)
+{
+  int given_number = take_number_from_user();
+  int given_position = take_position_from_user();
+  Status addition_status = insert_at(numbers, given_number, given_position);
+  printf("Addition was %ssuccessful.", addition_status ? "" : "un");
 }
 
 int main(void)
@@ -33,18 +66,16 @@ int main(void)
     switch (chosen_option)
     {
     case 'a':
-    {
-      Status addition_status = add_to_end(numbers, take_number_from_user());
-      printf("Addition was %ssuccessful.", addition_status ? "" : "un");
+      add_number_to_end(numbers);
       break;
-    }
 
     case 'b':
-    {
-      Status addition_status = add_to_start(numbers, take_number_from_user());
-      printf("Addition was %ssuccessful.", addition_status ? "" : "un");
+      add_number_to_start(numbers);
       break;
-    }
+
+    case 'c':
+      insert_number_at_selected_position(numbers);
+      break;
 
     case 'j':
       clear_list(numbers);
