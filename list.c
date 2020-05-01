@@ -90,6 +90,7 @@ Status insert_at(List_ptr list, int value, int position)
 
   new_node->next = p_walker->next;
   p_walker->next = new_node;
+  list->count++;
   return Success;
 }
 
@@ -164,6 +165,25 @@ Status remove_at(List_ptr list, int position)
   free(node_to_remove);
   list->count--;
   return Success;
+}
+
+int find_position(List_ptr list, int value)
+{
+  int position = -1;
+  Node_ptr pWalker = list->head;
+
+  for (unsigned index = 0; pWalker != NULL; index++)
+  {
+    if (pWalker->value == value)
+    {
+      position = index;
+      break;
+    }
+
+    pWalker = pWalker->next;
+  }
+
+  return position;
 }
 
 Status clear_list(List_ptr list)

@@ -72,6 +72,17 @@ void remove_number_at_selected_position(List_ptr numbers)
   printf("\nRemoval was %ssuccessful.", removal_status ? "" : "un");
 }
 
+void check_presence_of_number(List_ptr numbers)
+{
+  int given_number = take_number_from_user();
+  int found_index = find_position(numbers, given_number);
+
+  if (found_index < 0)
+    printf("\n%d does not exist in the list.", given_number);
+  else
+    printf("\n%d exists in the list and the first occurrance position is %u\n", given_number, found_index);
+}
+
 int main(void)
 {
   List_ptr numbers = create_list();
@@ -114,6 +125,10 @@ int main(void)
     case 'j':
       clear_list(numbers);
       printf("\nList has been cleared.");
+      break;
+
+    case 'k':
+      check_presence_of_number(numbers);
       break;
 
     case 'l':
