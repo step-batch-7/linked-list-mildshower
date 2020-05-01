@@ -97,7 +97,7 @@ void display(List_ptr list)
 {
   Node_ptr p_walker = list->head;
   unsigned position = 0;
-  printf("\nHere is the List:\n");
+  printf("\nHere is the List with element count %u:\n\npos -> number\n", list->count);
 
   while (p_walker != NULL)
   {
