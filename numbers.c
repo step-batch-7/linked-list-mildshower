@@ -19,7 +19,7 @@ int take_number_from_user(void)
 
 int main(void)
 {
-  List_ptr list = create_list();
+  List_ptr numbers = create_list();
 
   while (1)
   {
@@ -34,25 +34,25 @@ int main(void)
     {
     case 'a':
     {
-      Status addition_status = add_to_end(list, take_number_from_user());
+      Status addition_status = add_to_end(numbers, take_number_from_user());
       printf("Addition was %ssuccessful.", addition_status ? "" : "un");
       break;
     }
 
     case 'b':
     {
-      Status addition_status = add_to_start(list, take_number_from_user());
+      Status addition_status = add_to_start(numbers, take_number_from_user());
       printf("Addition was %ssuccessful.", addition_status ? "" : "un");
       break;
     }
 
     case 'j':
-      clear_list(list);
+      clear_list(numbers);
       printf("\nList has been cleared.");
       break;
 
     case 'l':
-      display(list);
+      display(numbers);
       break;
 
     default:
@@ -63,5 +63,6 @@ int main(void)
     fflush(stdin);
   }
 
+  destroy_list(numbers);
   return 0;
 }
