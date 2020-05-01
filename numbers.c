@@ -53,6 +53,13 @@ void insert_number_at_selected_position(List_ptr numbers)
   printf("Addition was %ssuccessful.", addition_status ? "" : "un");
 }
 
+void add_unique_number(List_ptr numbers)
+{
+  int given_number = take_number_from_user();
+  Status addition_status = add_unique(numbers, given_number);
+  printf("Addition was %ssuccessful.", addition_status ? "" : "un");
+}
+
 void remove_number_from_start(List_ptr numbers)
 {
   Status removal_status = remove_from_start(numbers);
@@ -108,6 +115,10 @@ int main(void)
 
     case 'c':
       insert_number_at_selected_position(numbers);
+      break;
+
+    case 'd':
+      add_unique_number(numbers);
       break;
 
     case 'e':

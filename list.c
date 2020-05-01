@@ -94,6 +94,14 @@ Status insert_at(List_ptr list, int value, int position)
   return Success;
 }
 
+Status add_unique(List_ptr list, int value)
+{
+  if (find_position(list, value) >= 0)
+    return Success;
+
+  return add_to_end(list, value);
+}
+
 void display(List_ptr list)
 {
   Node_ptr p_walker = list->head;
