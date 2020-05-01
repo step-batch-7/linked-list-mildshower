@@ -46,6 +46,11 @@ int main(void)
       break;
     }
 
+    case 'j':
+      clear_list(list);
+      printf("\nList has been cleared.");
+      break;
+
     case 'l':
       display(list);
       break;

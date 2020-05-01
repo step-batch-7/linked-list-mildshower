@@ -77,3 +77,20 @@ void display(List_ptr list)
     p_walker = p_walker->next;
   }
 }
+
+Status clear_list(List_ptr list)
+{
+  Node_ptr node_to_remove, p_walker = list->head;
+
+  while (p_walker != NULL)
+  {
+    node_to_remove = p_walker;
+    p_walker = p_walker->next;
+    free(node_to_remove);
+  }
+
+  list->head = NULL;
+  list->last = NULL;
+  list->count = 0;
+  return Success;
+}
