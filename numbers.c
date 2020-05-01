@@ -6,8 +6,9 @@ int take_number_from_user(void);
 void add_number_to_end(List_ptr numbers);
 void add_number_to_start(List_ptr numbers);
 void insert_number_at_selected_position(List_ptr numbers);
-void remove_number_at_start(List_ptr numbers);
-void remove_number_at_end(List_ptr numbers);
+void remove_number_from_start(List_ptr numbers);
+void remove_number_from_end(List_ptr numbers);
+void remove_number_at_selected_position(List_ptr numbers);
 
 void display_menu(void)
 {
@@ -52,15 +53,22 @@ void insert_number_at_selected_position(List_ptr numbers)
   printf("Addition was %ssuccessful.", addition_status ? "" : "un");
 }
 
-void remove_number_at_start(List_ptr numbers)
+void remove_number_from_start(List_ptr numbers)
 {
   Status removal_status = remove_from_start(numbers);
   printf("\nRemoval was %ssuccessful.", removal_status ? "" : "un");
 }
 
-void remove_number_at_end(List_ptr numbers)
+void remove_number_from_end(List_ptr numbers)
 {
   Status removal_status = remove_from_end(numbers);
+  printf("\nRemoval was %ssuccessful.", removal_status ? "" : "un");
+}
+
+void remove_number_at_selected_position(List_ptr numbers)
+{
+  int given_position = take_position_from_user();
+  Status removal_status = remove_at(numbers, given_position);
   printf("\nRemoval was %ssuccessful.", removal_status ? "" : "un");
 }
 
@@ -92,11 +100,15 @@ int main(void)
       break;
 
     case 'e':
-      remove_number_at_start(numbers);
+      remove_number_from_start(numbers);
       break;
 
     case 'f':
-      remove_number_at_end(numbers);
+      remove_number_from_end(numbers);
+      break;
+
+    case 'g':
+      remove_number_at_selected_position(numbers);
       break;
 
     case 'j':

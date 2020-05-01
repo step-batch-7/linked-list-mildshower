@@ -76,17 +76,17 @@ Status insert_at(List_ptr list, int value, int position)
   if (position > list->count || position < 0)
     return Failure;
 
+  Node_ptr new_node = create_node(value);
+
+  if (new_node == NULL)
+    return Failure;
+
   Node_ptr p_walker = list->head;
 
   for (unsigned curr_pos = 1; curr_pos < position; curr_pos++)
   {
     p_walker = p_walker->next;
   }
-
-  Node_ptr new_node = create_node(value);
-
-  if (new_node == NULL)
-    return Failure;
 
   new_node->next = p_walker->next;
   p_walker->next = new_node;
@@ -137,6 +137,31 @@ Status remove_from_end(List_ptr list)
   free(p_walker->next);
   p_walker->next = NULL;
   list->last = p_walker;
+  list->count--;
+  return Success;
+}
+
+Status remove_at(List_ptr list, int position)
+{
+  if (position >= list->count || position < 0)
+    return Failure;
+
+  if (list->count == 1 || position == list->count - 1)
+    return remove_from_end(list);
+
+  if (position == 0)
+    return remove_from_start(list);
+
+  Node_ptr p_walker = list->head;
+
+  for (int curr_position = 1; curr_position < position; curr_position++)
+  {
+    p_walker = p_walker->next;
+  }
+
+  Node_ptr node_to_remove = p_walker->next;
+  p_walker->next = p_walker->next->next;
+  free(node_to_remove);
   list->count--;
   return Success;
 }
