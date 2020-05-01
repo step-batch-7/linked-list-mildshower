@@ -6,6 +6,8 @@ int take_number_from_user(void);
 void add_number_to_end(List_ptr numbers);
 void add_number_to_start(List_ptr numbers);
 void insert_number_at_selected_position(List_ptr numbers);
+void remove_number_at_start(List_ptr numbers);
+void remove_number_at_end(List_ptr numbers);
 
 void display_menu(void)
 {
@@ -56,6 +58,12 @@ void remove_number_at_start(List_ptr numbers)
   printf("\nRemoval was %ssuccessful.", removal_status ? "" : "un");
 }
 
+void remove_number_at_end(List_ptr numbers)
+{
+  Status removal_status = remove_from_end(numbers);
+  printf("\nRemoval was %ssuccessful.", removal_status ? "" : "un");
+}
+
 int main(void)
 {
   List_ptr numbers = create_list();
@@ -85,6 +93,10 @@ int main(void)
 
     case 'e':
       remove_number_at_start(numbers);
+      break;
+
+    case 'f':
+      remove_number_at_end(numbers);
       break;
 
     case 'j':
