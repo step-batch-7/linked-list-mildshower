@@ -50,6 +50,12 @@ void insert_number_at_selected_position(List_ptr numbers)
   printf("Addition was %ssuccessful.", addition_status ? "" : "un");
 }
 
+void remove_number_at_start(List_ptr numbers)
+{
+  Status removal_status = remove_from_start(numbers);
+  printf("\nRemoval was %ssuccessful.", removal_status ? "" : "un");
+}
+
 int main(void)
 {
   List_ptr numbers = create_list();
@@ -75,6 +81,10 @@ int main(void)
 
     case 'c':
       insert_number_at_selected_position(numbers);
+      break;
+
+    case 'e':
+      remove_number_at_start(numbers);
       break;
 
     case 'j':

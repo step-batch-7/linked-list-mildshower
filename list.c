@@ -104,6 +104,18 @@ void display(List_ptr list)
   }
 }
 
+Status remove_from_start(List_ptr list)
+{
+  if (list->count == 0)
+    return Failure;
+
+  Node_ptr node_to_remove = list->head;
+  list->head = list->head->next;
+  free(node_to_remove);
+  list->count--;
+  return Success;
+}
+
 Status clear_list(List_ptr list)
 {
   Node_ptr node_to_remove, p_walker = list->head;
