@@ -12,6 +12,8 @@ void insert_number_at_selected_position(List_ptr numbers);
 void remove_number_from_start(List_ptr numbers);
 void remove_number_from_end(List_ptr numbers);
 void remove_number_at_selected_position(List_ptr numbers);
+void remove_first_occurrence_of_number(List_ptr numbers);
+void remove_all_occurrences_of_number(List_ptr numbers);
 void check_presence_of_number(List_ptr numbers);
 
 void perform_action(List_ptr numbers, char chosen_option)
@@ -44,6 +46,14 @@ void perform_action(List_ptr numbers, char chosen_option)
 
   case 'g':
     remove_number_at_selected_position(numbers);
+    break;
+
+  case 'h':
+    remove_first_occurrence_of_number(numbers);
+    break;
+
+  case 'i':
+    remove_all_occurrences_of_number(numbers);
     break;
 
   case 'j':
@@ -133,6 +143,20 @@ void remove_number_at_selected_position(List_ptr numbers)
 {
   int given_position = take_position_from_user();
   Status removal_status = remove_at(numbers, given_position);
+  printf("\nRemoval was %ssuccessful.", removal_status ? "" : "un");
+}
+
+void remove_first_occurrence_of_number(List_ptr numbers)
+{
+  int given_number = take_number_from_user();
+  Status removal_status = remove_first_occurrence(numbers, given_number);
+  printf("\nRemoval was %ssuccessful.", removal_status ? "" : "un");
+}
+
+void remove_all_occurrences_of_number(List_ptr numbers)
+{
+  int given_number = take_number_from_user();
+  Status removal_status = remove_all_occurrences(numbers, given_number);
   printf("\nRemoval was %ssuccessful.", removal_status ? "" : "un");
 }
 

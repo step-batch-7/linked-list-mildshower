@@ -194,6 +194,48 @@ int find_position(List_ptr list, int value)
   return position;
 }
 
+Status remove_first_occurrence(List_ptr list, int value)
+{
+  int first_occurrence_position = find_position(list, value);
+
+  if (first_occurrence_position < 0)
+    return Failure;
+
+  return remove_at(list, first_occurrence_position);
+}
+
+Status remove_all_occurrences(List_ptr list, int value)
+{
+  if (find_position(list, value) < 0)
+    return Failure;
+
+  Node_ptr p_walker = list->head;
+
+  if (list->count == 1)
+    return remove_from_start(list);
+
+  while (p_walker->next->next != NULL)
+  {
+    if (p_walker->next->value == value)
+    {
+      Node_ptr node_to_remove = p_walker->next;
+      p_walker->next = p_walker->next->next;
+      free(node_to_remove);
+      list->count--;
+    }
+    else
+      p_walker = p_walker->next;
+  }
+
+  if (list->head->value == value)
+    remove_from_start(list);
+
+  if (list->last->value == value)
+    remove_from_end(list);
+
+  return Success;
+}
+
 Status clear_list(List_ptr list)
 {
   Node_ptr node_to_remove, p_walker = list->head;
