@@ -152,7 +152,6 @@ Status remove_from_end(List_ptr list)
     return clear_list(list);
 
   Node_ptr second_last_node = get_node(list, list->count - 2);
-
   free(second_last_node->next);
   second_last_node->next = NULL;
   list->last = second_last_node;
@@ -210,15 +209,10 @@ Status remove_first_occurrence(List_ptr list, int value)
 
 Status remove_all_occurrences(List_ptr list, int value)
 {
-  if (find_position(list, value) < 0)
-    return Failure;
-
   Node_ptr p_walker = list->head;
+  int previous_count = list->count;
 
-  if (list->count == 1)
-    return clear_list(list);
-
-  while (p_walker->next->next != NULL)
+  for (int pos = 0; pos < previous_count - 2; pos++)
   {
     if (p_walker->next->value == value)
     {
@@ -231,13 +225,13 @@ Status remove_all_occurrences(List_ptr list, int value)
       p_walker = p_walker->next;
   }
 
-  if (list->head->value == value)
+  if (list->head != NULL && list->head->value == value)
     remove_from_start(list);
 
-  if (list->last->value == value)
+  if (list->last != NULL && list->last->value == value)
     remove_from_end(list);
 
-  return Success;
+  return (Status)(list->count < previous_count);
 }
 
 Status clear_list(List_ptr list)
