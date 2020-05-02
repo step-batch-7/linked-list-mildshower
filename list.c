@@ -30,6 +30,21 @@ List_ptr create_list(void)
   return list;
 }
 
+Node_ptr get_node(List_ptr list, unsigned position)
+{
+  if (position >= list->count)
+    return NULL;
+
+  Node_ptr p_walker = list->head;
+
+  for (unsigned curr_pos = 0; curr_pos < position; curr_pos++)
+  {
+    p_walker = p_walker->next;
+  }
+
+  return p_walker;
+}
+
 Status add_to_end(List_ptr list, int value)
 {
   Node_ptr new_node = create_node(value);
@@ -84,15 +99,9 @@ Status insert_at(List_ptr list, int value, int position)
   if (new_node == NULL)
     return Failure;
 
-  Node_ptr p_walker = list->head;
-
-  for (unsigned curr_pos = 1; curr_pos < position; curr_pos++)
-  {
-    p_walker = p_walker->next;
-  }
-
-  new_node->next = p_walker->next;
-  p_walker->next = new_node;
+  Node_ptr previous_node = get_node(list, position - 1);
+  new_node->next = previous_node->next;
+  previous_node->next = new_node;
   list->count++;
   return Success;
 }
@@ -167,18 +176,11 @@ Status remove_at(List_ptr list, int position)
   if (position == 0)
     return remove_from_start(list);
 
-  Node_ptr p_walker = list->head;
-
-  for (int curr_position = 1; curr_position < position; curr_position++)
-  {
-    p_walker = p_walker->next;
-  }
-
-  Node_ptr node_to_remove = p_walker->next;
-  p_walker->next = p_walker->next->next;
+  Node_ptr previous_node = get_node(list, position - 1);
+  Node_ptr node_to_remove = previous_node->next;
+  previous_node->next = previous_node->next->next;
   free(node_to_remove);
   list->count--;
-  printf("%p\n", list->last);
   return Success;
 }
 

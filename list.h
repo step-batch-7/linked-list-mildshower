@@ -27,6 +27,8 @@ typedef List *List_ptr;
 Node_ptr create_node(int value);
 List_ptr create_list(void);
 
+Node_ptr get_node(List_ptr list, unsigned position);
+
 Status add_to_end(List_ptr, int value);
 Status add_to_start(List_ptr, int value);
 Status insert_at(List_ptr, int value, int position);
