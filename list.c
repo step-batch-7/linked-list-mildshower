@@ -231,7 +231,7 @@ Status remove_all_occurrences(List_ptr list, int value)
   if (list->last != NULL && list->last->value == value)
     remove_from_end(list);
 
-  return (Status)(list->count < previous_count);
+  return list->count < previous_count;
 }
 
 Status clear_list(List_ptr list)
