@@ -219,7 +219,7 @@ Status remove_all_occurrences(List_ptr list, int value)
   Node_ptr p_walker = list->head;
 
   if (list->count == 1)
-    return remove_from_start(list);
+    return clear_list(list);
 
   while (p_walker->next->next != NULL)
   {
