@@ -151,16 +151,11 @@ Status remove_from_end(List_ptr list)
   if (list->count == 1)
     return clear_list(list);
 
-  Node_ptr p_walker = list->head;
+  Node_ptr second_last_node = get_node(list, list->count - 2);
 
-  while (p_walker->next != list->last)
-  {
-    p_walker = p_walker->next;
-  }
-
-  free(p_walker->next);
-  p_walker->next = NULL;
-  list->last = p_walker;
+  free(second_last_node->next);
+  second_last_node->next = NULL;
+  list->last = second_last_node;
   list->count--;
   return Success;
 }
