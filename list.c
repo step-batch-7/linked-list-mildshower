@@ -70,14 +70,14 @@ Status add_to_start(List_ptr list, int value)
 Status insert_at(List_ptr list, int value, int position)
 {
 
+  if (position > list->count || position < 0)
+    return Failure;
+
   if (position == 0)
     return add_to_start(list, value);
 
   if (position == list->count)
     return add_to_end(list, value);
-
-  if (position > list->count || position < 0)
-    return Failure;
 
   Node_ptr new_node = create_node(value);
 
@@ -109,13 +109,12 @@ void display(List_ptr list)
 {
   Node_ptr p_walker = list->head;
   unsigned position = 0;
-  printf("\nHere is the List with element count %u:\n\npos -> number\n", list->count);
-
+  printf("\nHere is the List with element count %u:\npos -> value\n", list->count);
   while (p_walker != NULL)
   {
     printf("%3u -> %d\n", position, p_walker->value);
-    position++;
     p_walker = p_walker->next;
+    position++;
   }
 }
 
