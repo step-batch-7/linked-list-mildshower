@@ -123,10 +123,14 @@ Status remove_from_start(List_ptr list)
   if (list->count == 0)
     return Failure;
 
+  if (list->count == 1)
+    return clear_list(list);
+
   Node_ptr node_to_remove = list->head;
   list->head = list->head->next;
   free(node_to_remove);
   list->count--;
+
   return Success;
 }
 
