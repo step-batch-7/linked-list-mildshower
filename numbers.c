@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include "list.h"
 
@@ -130,6 +131,9 @@ void display_menu(void)
 int main(void)
 {
   List_ptr numbers = create_list();
+
+  if (numbers == NULL)
+    exit(0);
 
   while (1)
   {
