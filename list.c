@@ -161,7 +161,7 @@ Status remove_at(List_ptr list, int position)
   if (position >= list->count || position < 0)
     return Failure;
 
-  if (list->count == 1 || position == list->count - 1)
+  if (position == list->count - 1)
     return remove_from_end(list);
 
   if (position == 0)
@@ -178,6 +178,7 @@ Status remove_at(List_ptr list, int position)
   p_walker->next = p_walker->next->next;
   free(node_to_remove);
   list->count--;
+  printf("%p\n", list->last);
   return Success;
 }
 
