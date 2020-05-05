@@ -109,7 +109,7 @@ Status insert_at(List_ptr list, int value, int position)
 Status add_unique(List_ptr list, int value)
 {
   if (find_position(list, value) >= 0)
-    return Success;
+    return Failure;
 
   return add_to_end(list, value);
 }
