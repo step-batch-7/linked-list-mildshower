@@ -85,12 +85,34 @@ void test_add_unique(void)
   printf("\t\t--passed\n\n");
 }
 
+void test_remove_from_start(void)
+{
+  printf("\n\nTesting remove_from_start\n\n");
+
+  List_ptr list = create_list();
+  add_to_end(list, 0);
+  printf("\tShould remove the first number of the list\n");
+  assert(remove_from_start(list));
+  assert(list->head == NULL);
+  assert(list->last == NULL);
+  assert(list->count == 0);
+  printf("\t\t--passed\n\n");
+
+  printf("\tShould fail if the list is empty\n");
+  assert(!remove_from_start(list));
+  assert(list->head == NULL);
+  assert(list->last == NULL);
+  assert(list->count == 0);
+  printf("\t\t--passed\n\n");
+}
+
 int main(void)
 {
   test_add_to_end();
   test_add_to_start();
   test_insert_at();
   test_add_unique();
+  test_remove_from_start();
 
   return 0;
 }
