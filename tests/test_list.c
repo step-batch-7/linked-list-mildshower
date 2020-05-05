@@ -50,18 +50,26 @@ void test_insert_at(void)
   assert(list->count == 1);
   printf("\t\t--passed\n\n");
 
+  add_to_end(list, 2);
+  printf("\tShould add new number at middle\n");
+  assert(insert_at(list, 1, 1));
+  assert(list->head->value == 0);
+  assert(list->last->value == 2);
+  assert(list->count == 3);
+  printf("\t\t--passed\n\n");
+
   printf("\tShould not add new number a position is given that exceeds allowed limit\n");
   assert(!insert_at(list, 0, 10));
   assert(list->head->value == 0);
-  assert(list->last->value == 0);
-  assert(list->count == 1);
+  assert(list->last->value == 2);
+  assert(list->count == 3);
   printf("\t\t--passed\n\n");
 
   printf("\tShould not add new number a negative position is given\n");
   assert(!insert_at(list, 0, 10));
   assert(list->head->value == 0);
-  assert(list->last->value == 0);
-  assert(list->count == 1);
+  assert(list->last->value == 2);
+  assert(list->count == 3);
   printf("\t\t--passed\n\n");
 }
 
@@ -91,7 +99,15 @@ void test_remove_from_start(void)
 
   List_ptr list = create_list();
   add_to_end(list, 0);
+  add_to_end(list, 1);
   printf("\tShould remove the first number of the list\n");
+  assert(remove_from_start(list));
+  assert(list->head->value == 1);
+  assert(list->last->value == 1);
+  assert(list->count == 1);
+  printf("\t\t--passed\n\n");
+
+  printf("\tShould clear the list when only one number is in the list\n");
   assert(remove_from_start(list));
   assert(list->head == NULL);
   assert(list->last == NULL);
@@ -112,7 +128,15 @@ void test_remove_from_end(void)
 
   List_ptr list = create_list();
   add_to_end(list, 0);
+  add_to_end(list, 1);
   printf("\tShould remove the last number of the list\n");
+  assert(remove_from_end(list));
+  assert(list->head->value == 0);
+  assert(list->last->value == 0);
+  assert(list->count == 1);
+  printf("\t\t--passed\n\n");
+
+  printf("\tShould clear the list when only one number is present\n");
   assert(remove_from_end(list));
   assert(list->head == NULL);
   assert(list->last == NULL);
@@ -214,6 +238,23 @@ void test_remove_all_occurrences(void)
   printf("\t\t--passed\n\n");
 }
 
+void test_find_position(void)
+{
+  printf("\n\nTesting find_position\n\n");
+
+  List_ptr list = create_list();
+  add_to_end(list, 0);
+  add_to_end(list, 0);
+
+  printf("\tShould give first matched position\n");
+  assert(find_position(list, 0) == 0);
+  printf("\t\t--passed\n\n");
+
+  printf("\tShould give -1 when no match found\n");
+  assert(find_position(list, 1) == -1);
+  printf("\t\t--passed\n\n");
+}
+
 void test_clear_list(void)
 {
   printf("\n\nTesting clear_list\n\n");
@@ -241,6 +282,7 @@ int main(void)
   test_remove_at();
   test_remove_first_occurrence();
   test_remove_all_occurrences();
+  test_find_position();
   test_clear_list();
 
   return 0;
