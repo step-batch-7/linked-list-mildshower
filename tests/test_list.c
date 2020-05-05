@@ -127,6 +127,41 @@ void test_remove_from_end(void)
   printf("\t\t--passed\n\n");
 }
 
+void test_remove_at(void)
+{
+  printf("\n\nTesting remove_at\n\n");
+
+  List_ptr list = create_list();
+  add_to_end(list, 0);
+  printf("\tShould fail if exceeded position is given\n");
+  assert(!remove_at(list, 10));
+  assert(list->head->value == 0);
+  assert(list->last->value == 0);
+  assert(list->count == 1);
+  printf("\t\t--passed\n\n");
+
+  printf("\tShould fail if negative position is given\n");
+  assert(!remove_at(list, 10));
+  assert(list->head->value == 0);
+  assert(list->last->value == 0);
+  assert(list->count == 1);
+  printf("\t\t--passed\n\n");
+
+  printf("\tShould remove the number of the given valid position\n");
+  assert(remove_at(list, 0));
+  assert(list->head == NULL);
+  assert(list->last == NULL);
+  assert(list->count == 0);
+  printf("\t\t--passed\n\n");
+
+  printf("\tShould fail if the list is empty\n");
+  assert(!remove_at(list, 0));
+  assert(list->head == NULL);
+  assert(list->last == NULL);
+  assert(list->count == 0);
+  printf("\t\t--passed\n\n");
+}
+
 int main(void)
 {
   test_add_to_end();
@@ -135,6 +170,7 @@ int main(void)
   test_add_unique();
   test_remove_from_start();
   test_remove_from_end();
+  test_remove_at();
 
   return 0;
 }
