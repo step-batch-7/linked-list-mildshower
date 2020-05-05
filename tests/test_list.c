@@ -214,6 +214,22 @@ void test_remove_all_occurrences(void)
   printf("\t\t--passed\n\n");
 }
 
+void test_clear_list(void)
+{
+  printf("\n\nTesting clear_list\n\n");
+
+  List_ptr list = create_list();
+  add_to_end(list, 0);
+  add_to_end(list, 1);
+
+  printf("\tShould clear the whole list\n");
+  assert(clear_list(list));
+  assert(list->head == NULL);
+  assert(list->last == NULL);
+  assert(list->count == 0);
+  printf("\t\t--passed\n\n");
+}
+
 int main(void)
 {
   test_add_to_end();
@@ -225,6 +241,7 @@ int main(void)
   test_remove_at();
   test_remove_first_occurrence();
   test_remove_all_occurrences();
+  test_clear_list();
 
   return 0;
 }
