@@ -271,6 +271,24 @@ void test_clear_list(void)
   printf("\t\t--passed\n\n");
 }
 
+void test_get_node(void)
+{
+  printf("\n\n Testing get_node\n\n");
+
+  List_ptr list = create_list();
+  add_to_end(list, 0);
+
+  printf("\tShould give the node of given position\n");
+  Node_ptr node = get_node(list, 0);
+  assert(node->value == 0);
+  assert(node->next == NULL);
+  printf("\t\t--passed\n\n");
+
+  printf("\tShould give NULL when invalid position is given\n");
+  assert(get_node(list, 10) == NULL);
+  printf("\t\t--passed\n\n");
+}
+
 int main(void)
 {
   test_add_to_end();
@@ -284,6 +302,7 @@ int main(void)
   test_remove_all_occurrences();
   test_find_position();
   test_clear_list();
+  test_get_node();
 
   return 0;
 }
